@@ -45,7 +45,7 @@ class GameObject:
         pass
 
     def add_component(self, component: Component) -> Component:
-        if type(component) != Component:
+        if not isinstance(component, Component):
             raise TypeError(f"Expected type peapy2.Component, got {type(component)}")
 
         if component.NAME in self.components:

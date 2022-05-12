@@ -1,14 +1,13 @@
-import peapy2
+from peapy2.component import Component
 
 
-VALID_SHAPES = []
+class Sound(Component):
+    NAME = "Sound"
 
-
-class Renderer(peapy2.Component):
-    NAME = "Renderer"
-
-    def __init__(self):
+    def __init__(self, path: str):
         super().__init__()
+
+        self.path = path
 
     # Called when the component is created
     def init(self):

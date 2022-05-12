@@ -18,7 +18,7 @@ class PeaPy:
         return self.window.update()
 
     def add_object(self, obj: GameObject) -> GameObject:
-        if type(obj) != GameObject:
+        if not isinstance(obj, GameObject):
             raise TypeError(f"Expected type peapy2.GameObject, got {type(obj)}")
 
         if obj.name in self.objects:

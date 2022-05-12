@@ -1,0 +1,4 @@
+build/
+peapy2.egg-info/
+.venv/
+__pycache__/
