@@ -14,6 +14,7 @@ class Renderer(peapy2.Component):
     def init(self):
         pass
 
+
     # Called when the game gets updated
     def update(self):
         pass
