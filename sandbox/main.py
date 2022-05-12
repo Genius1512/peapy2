@@ -12,5 +12,5 @@ def main():
     game.quit()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

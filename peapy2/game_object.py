@@ -44,9 +44,7 @@ class GameObject:
     def destroy(self):
         pass
 
-    def add_component(
-            self, component: Component
-    ) -> Component:
+    def add_component(self, component: Component) -> Component:
         if type(component) != Component:
             raise TypeError(f"Expected type peapy2.Component, got {type(component)}")
 

@@ -5,12 +5,12 @@ class Transform(Component):
     NAME = "Transform"
 
     def __init__(
-            self,
-            x: float | int,
-            y: float | int,
-            width: float | int,
-            height: float | int,
-            rotation: float | int = 0,
+        self,
+        x: float | int,
+        y: float | int,
+        width: float | int,
+        height: float | int,
+        rotation: float | int = 0,
     ):
         super().__init__()
 
