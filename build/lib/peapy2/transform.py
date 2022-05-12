@@ -1,4 +1,4 @@
-from peapy2.component import Component
+from .component import Component
 
 
 class Transform(Component):
@@ -32,18 +32,4 @@ class Transform(Component):
     def destroy(self):
         pass
 
-    @property
-    def top_left(self):
-        return self.x, self.y
-
-    @property
-    def top_right(self):
-        return self.x + self.width, self.y
-
-    @property
-    def bottom_left(self):
-        return self.x, self.y + self.height
-
-    @property
-    def bottom_right(self):
-        return self.x + self.width, self.y + self.height
+    # TODO: Add properties

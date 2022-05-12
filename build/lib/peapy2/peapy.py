@@ -1,9 +1,10 @@
-from peapy2 import exceptions
-from peapy2.game_object import GameObject
-from peapy2.window import Window
+from . import exceptions
+from .game_object import GameObject
+from .window import Window
 
 
 class PeaPy:
+    # TODO: Access objects as attributes
     def __init__(self, title: str):
         self.title = title
 
@@ -19,10 +20,7 @@ class PeaPy:
 
     def add_object(
             self, obj: GameObject
-    ) -> GameObject:
-        if type(obj) != GameObject:
-            raise TypeError(f"Expected type peapy2.GameObject, got {type(obj)}")
-
+    ) -> GameObject:  # TODO: Check if type is game_object
         if obj.name in self.objects:
             raise exceptions.ObjectAlreadyExists(obj.name)
 
@@ -54,9 +52,6 @@ class PeaPy:
 
     def quit(self):
         pass
-
-    def __getattr__(self, item):
-        return self.get_object(item)
 
     def __getitem__(self, item) -> GameObject:
         return self.get_object(item)

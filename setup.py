@@ -1,6 +1,5 @@
 import setuptools
 
-
 setuptools.setup(
     name="peapy2",
     version="0.0.0",

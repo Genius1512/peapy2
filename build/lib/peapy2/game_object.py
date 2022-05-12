@@ -1,5 +1,5 @@
-from peapy2.component import Component
-from peapy2 import exceptions
+from .component import Component
+from . import exceptions
 
 
 class GameObject:
@@ -13,10 +13,7 @@ class GameObject:
     def init_(self, peapy):
         self.peapy = peapy
 
-        try:
-            self.init()
-        except AttributeError:
-            pass
+        self.init()  # TODO: make game_object.init() optional
 
     def init(self):
         pass
@@ -25,10 +22,7 @@ class GameObject:
         for component in self.components.values():
             component.update()
 
-        try:
-            self.update()
-        except AttributeError:
-            pass
+        self.update()  # TODO: make game_object.update() optional
 
     def update(self):
         pass
@@ -36,20 +30,15 @@ class GameObject:
     def destroy_(self):
         for component in self.components.values():
             component.destroy_()
-        try:
-            self.destroy()
-        except AttributeError:
-            pass
+
+        self.destroy()  # TODO: make game_object.destroy() optional
 
     def destroy(self):
         pass
 
     def add_component(
             self, component: Component
-    ) -> Component:
-        if type(component) != Component:
-            raise TypeError(f"Expected type peapy2.Component, got {type(component)}")
-
+    ) -> Component:  # TODO: Check if type is component
         if component.NAME in self.components:
             raise exceptions.ComponentAlreadyExists(component.NAME)
 

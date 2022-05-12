@@ -9,35 +9,24 @@ class Component:
         self.peapy = peapy
         self.parent_name = parent_name
 
-        try:
-            self.init()
-        except AttributeError:
-            pass
+        self.init()  # TODO: make component.init() optional
 
     def init(self):
         pass
 
     def update_(self):
-        try:
-            self.update()
-        except AttributeError:
-            pass
+        self.update()  # TODO: make component.update() optional
 
     def update(self):
         pass
 
     def destroy_(self):
-        try:
-            self.destroy()
-        except AttributeError:
-            pass
+        self.destroy()  # TODO: make component.destroy() optional
 
     def destroy(self):
         pass
 
-    @property
-    def game_object(self):
-        return self.peapy[self.parent_name]
+    #  TODO: .gameObject property
 
     def tree(self) -> str:
         return f"\t\t{self.NAME}\n"
