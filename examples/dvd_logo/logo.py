@@ -11,6 +11,8 @@ class Logo(peapy2.GameObject):
         self.x_vel = 2
         self.y_vel = 2
 
+        self.vel = 200
+
     # Called when the object is created
     def init(self):
         self.transform: peapy2.Transform = self.add_component(peapy2.Transform(
@@ -34,14 +36,14 @@ class Logo(peapy2.GameObject):
         self.transform.y += self.y_vel
 
         if self.transform.x > self.peapy.width - self.text.font_size - 30:
-            self.x_vel = -2
+            self.x_vel = -self.vel * self.peapy.window.delta_time
         elif self.transform.x < 0:
-            self.x_vel = 2
+            self.x_vel = self.vel * self.peapy.window.delta_time
 
         if self.transform.y > self.peapy.height - self.text.font_size:
-            self.y_vel = -2
+            self.y_vel = -self.vel * self.peapy.window.delta_time
         elif self.transform.y < 0:
-            self.y_vel = 2
+            self.y_vel = self.vel * self.peapy.window.delta_time
 
     # Called when the object is destroyed
     def destroy(self):

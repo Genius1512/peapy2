@@ -18,8 +18,6 @@ class Component:
         pass
 
     def update_(self):
-        print(f"Updating {self.NAME}")
-
         try:
             self.update()
         except AttributeError:
