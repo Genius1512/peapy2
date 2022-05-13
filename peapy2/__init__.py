@@ -5,6 +5,7 @@ from peapy2.image_renderer import ImageRenderer
 from peapy2.peapy import PeaPy
 from peapy2.shape_renderer import ShapeRenderer
 from peapy2.sound import Sound
+from peapy2.text import Text
 from peapy2.transform import Transform
 from peapy2.utils import *
 from peapy2.window import Window

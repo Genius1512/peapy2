@@ -10,7 +10,14 @@ def main():
     player_pos: peapy2.Transform = player.add_component(
         peapy2.Transform(100, 100, 50, 50)
     )
-    player_renderer = player.add_component(peapy2.ShapeRenderer("circle", (0, 0, 0)))
+    player_text: peapy2.Text = player.add_component(peapy2.Text(
+        "Player",
+        font_name="Arial",
+        font_size=20,
+        color=(0, 0, 0),
+        x_offset=200,
+        y_offset=0,
+    ))
 
     while game.update():
         player_pos.x += 1
