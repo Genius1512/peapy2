@@ -2,10 +2,11 @@ from peapy2.__pygame import pygame
 
 
 class Window:
-    def __init__(self, width, height, title):
+    def __init__(self, width, height, title, background_color: tuple = (0, 0, 0)):
         self.width = width
         self.height = height
         self.title = title
+        self.background_color = background_color
 
         pygame.init()
 

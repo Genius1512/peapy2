@@ -2,16 +2,15 @@ from peapy2.component import Component
 from peapy2.__pygame import pygame
 
 
-VALID_SHAPES = [
-    "circle",
-    "rectangle"
-]
+VALID_SHAPES = ["circle", "rectangle"]
 
 
 class ShapeRenderer(Component):
     NAME = "Renderer"
 
-    def __init__(self, shape: str, color: tuple[int, int, int] | tuple[int, int, int, int]):
+    def __init__(
+        self, shape: str, color: tuple[int, int, int] | tuple[int, int, int, int]
+    ):
         super().__init__()
         self.shape = shape
         self.color = color
@@ -38,7 +37,11 @@ class ShapeRenderer(Component):
             width = self.peapy[self.parent_name]["Transform"].width
             height = self.peapy[self.parent_name]["Transform"].height
 
-            pygame.draw.rect(self.peapy.window.screen, self.color, (top_left[0], top_left[1], width, height))
+            pygame.draw.rect(
+                self.peapy.window.screen,
+                self.color,
+                (top_left[0], top_left[1], width, height),
+            )
 
     # Called when the component is destroyed
     def destroy(self):

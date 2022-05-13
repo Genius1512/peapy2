@@ -20,18 +20,6 @@ class Transform(Component):
         self.height = height
         self.rotation = rotation
 
-    # Called when the component is created
-    def init(self):
-        pass
-
-    # Called when the game gets updated
-    def update(self):
-        pass
-
-    # Called when the component is destroyed
-    def destroy(self):
-        pass
-
     @property
     def top_left(self):
         return self.x, self.y

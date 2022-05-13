@@ -54,7 +54,9 @@ class ImageRenderer(Component):
 
         image = pygame.transform.scale(self.image, (width, height))
 
-        self.peapy.window.screen.blit(image, self.peapy[self.parent_name].get_component("Transform").top_left)
+        self.peapy.window.screen.blit(
+            image, self.peapy[self.parent_name].get_component("Transform").top_left
+        )
 
     # Called when the component is destroyed
     def destroy(self):

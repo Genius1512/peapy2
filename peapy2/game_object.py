@@ -23,7 +23,7 @@ class GameObject:
 
     def update_(self):
         for component in self.components.values():
-            component.update()
+            component.update_()
 
         try:
             self.update()
@@ -36,6 +36,7 @@ class GameObject:
     def destroy_(self):
         for component in self.components.values():
             component.destroy_()
+
         try:
             self.destroy()
         except AttributeError:

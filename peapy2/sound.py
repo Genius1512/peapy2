@@ -1,22 +1,35 @@
 from peapy2.component import Component
+from .__pygame import pygame
 
 
 class Sound(Component):
-    NAME = "Sound"
-
-    def __init__(self, path: str):
+    def __init__(self, file_path: str, channel: int):
         super().__init__()
 
-        self.path = path
+        pygame.mixer.init()
+        self.sound = pygame.mixer.Sound(file_path)
+        self.channel_num = channel
+        self.channel = pygame.mixer.Channel(self.channel_num)
 
-    # Called when the component is created
-    def init(self):
-        pass
+    def play(self):
+        self.channel.play(self.sound)
 
-    # Called when the game gets updated
-    def update(self):
-        pass
+    def stop(self):
+        self.channel.stop()
 
-    # Called when the component is destroyed
-    def destroy(self):
-        pass
+    def pause(self):
+        self.channel.pause()
+
+    def unpause(self):
+        self.channel.unpause()
+
+    def set_volume(self, volume: float):
+        self.sound.set_volume(volume)
+
+    @property
+    def volume(self):
+        return self.sound.get_volume()
+
+    @property
+    def is_playing(self):
+        return pygame.mixer.Channel(self.channel).get_busy()
