@@ -1,3 +1,4 @@
+from peapy2.color import Color
 from peapy2 import exceptions
 from peapy2.game_object import GameObject
 from peapy2.window import Window
@@ -5,8 +6,20 @@ from peapy2.window import Window
 
 class PeaPy:
     def __init__(
-        self, title: str, width: int, height: int, background_color: tuple = (0, 0, 0)
+            self, title, width, height, background_color=Color(0, 0, 0),
     ):
+        """
+        Construct a PeaPy object.
+
+        :param title: Title of the window
+        :type title: str
+        :param width: Width of the window
+        :type width: int
+        :param height: Height of the window
+        :type height: int
+        :param background_color: Color of the window
+        :type background_color: Color
+        """
         self.title = title
         self.width = width
         self.height = height
@@ -17,7 +30,12 @@ class PeaPy:
         self.objects: dict[str, GameObject] = {}
 
     def update(self) -> bool:
-        self.window.screen.fill(self.background_color)
+        """
+        Update the game.
+
+        :return: True if the game should continue, False if the window should close.
+        """
+        self.window.screen.fill(self.background_color.rgba)
 
         for obj in self.objects.values():
             obj.update_()
@@ -25,6 +43,13 @@ class PeaPy:
         return self.window.update()
 
     def add_object(self, obj: GameObject) -> GameObject:
+        """
+        Add the given GameObject to the PeaPy object.
+
+        :param obj: The GameObject to add.
+        :type obj: peapy2.GameObject
+        :return: The given GameObject. This allows for this syntax: game_object = game.add_object(peapy2.GameObject())
+        """
         if not isinstance(obj, GameObject):
             raise TypeError(f"Expected type peapy2.GameObject, got {type(obj)}")
 
@@ -35,30 +60,52 @@ class PeaPy:
         self.objects[obj.name].init_(self)
         return self.objects[obj.name]
 
-    def get_object(self, name: str) -> GameObject:
+    def get_object(self, name) -> GameObject:
+        """
+        Get a GameObject with the given name. Raises an exception when the GameObject is not found.
+
+        :param name: The name of the GameObject.
+        :type name: str
+        :return: The GameObject with the given name.
+        """
         if name not in self.objects:
             raise exceptions.ObjectDoesNotExist(name)
 
         return self.objects[name]
 
     def get_objects(self) -> dict[str, GameObject]:
+        """
+        Get a dictionary of all GameObjects.
+
+        :return: A dictionary with all GameObjects.
+        """
         return self.objects
 
-    def remove_object(self, name: str) -> None:
+    def remove_object(self, name) -> None:
+        """
+        Remove the GameObject with the given name.
+
+        :param name: The name of the GameObject
+        :type name: str
+        """
         if name not in self.objects:
             raise exceptions.ObjectDoesNotExist(name)
 
         self.objects[name].destroy_()
         del self.objects[name]
 
-    def tree(self) -> str:
+    def tree(self) -> str:  # TODO: Rewrite
+        """
+        Get a tree representation of the PeaPy object.
+
+        :return: A tree representation of the PeaPy object.
+        """
         out = f"{self.title}\n"
         for obj in self.objects.values():
-            out += f"{obj.tree()}\n"
+            out += f"\t{obj.name}\n"
+            for component in obj.get_components().values():
+                out += f"\t\t{component.NAME}\n"
         return out
-
-    def quit(self):
-        pass
 
     def __getattr__(self, item):
         return self.get_object(item)

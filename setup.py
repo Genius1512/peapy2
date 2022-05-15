@@ -5,6 +5,6 @@ setuptools.setup(
     version="0.0.0",
     author="Silvan Schmidt",
     description="A python game engine",
-    install_requires=[],
+    install_requires=["pygame==2.1.2"],
     packages=["peapy2"],
 )

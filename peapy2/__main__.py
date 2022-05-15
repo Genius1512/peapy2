@@ -5,7 +5,8 @@ MAIN = """import peapy2
 
 
 def main():
-    game = peapy2.PeaPy("PeaPy")
+    game = peapy2.PeaPy("PeaPy", 800, 600, (255, 255, 255))
+
     while game.update():
         pass
         

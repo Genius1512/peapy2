@@ -8,7 +8,7 @@ def main():
         "PeaPy",
         800,
         600,
-        (255, 255, 255)
+        peapy2.Color(255, 255, 255)
     )
 
     logo = game.add_object(Logo("Logo"))

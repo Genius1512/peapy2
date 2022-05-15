@@ -8,9 +8,25 @@ FROM_IMAGE = -1
 
 
 class ImageRenderer(Component):
+    """
+    Component to render images in the window
+    """
+
     NAME = "ImageRenderer"
 
     def __init__(self, path: str, width: int = -1, height: int = -1):
+        """
+        Construct a ImageRenderer.
+
+        :param path: Path to the image to render
+        :type path: str
+        :param width: Width the image should be displayed in. Use -2 to set the width to the width of the parent's
+                      GameObject's Transform. Use -1 to set the width to the width of the image
+        :type width: int
+        :param height: Height the image should be displayed in. Use -2 to set the height to the height of the parent's
+                       GameObject's Transform. Use -1 to set the height to the height of the image
+        :type height: int
+        """
         super().__init__()
 
         self.path = path

@@ -3,80 +3,122 @@ from peapy2 import exceptions
 
 
 class GameObject:
-    def __init__(self, name: str):
+    """
+    GameObject class to be used in the PeaPy object.
+    """
+
+    def __init__(self, name):
+        """
+        Construct a GameObject
+
+        :param name: The name of the GameObject.
+        :type name: str
+        """
         self.name = name
 
         self.peapy = None
 
-        self.components: dict[str, Component] = {}
+        self.__components: dict[str, Component] = {}
 
     def init_(self, peapy):
+        """
+        Called when the GameObject gets added to a PeaPy object.
+        Don't override this method (!), use the init() method instead
+
+        :param peapy: The parent PeaPy object.
+        :type peapy: peapy2.PeaPy
+        """
         self.peapy = peapy
 
-        try:
-            self.init()
-        except AttributeError:
-            pass
+        self.init()
 
     def init(self):
-        pass
+        """
+        Called when the GameObject gets added to a PeaPy object.
+        Do things here that require the parent PeaPy object to be initialized.
+        """
 
     def update_(self):
-        for component in self.components.values():
+        """
+        Called when the GameObject gets updated.
+        Don't override this method (!), use the update() method instead
+        """
+        for component in self.__components.values():
             component.update_()
 
-        try:
-            self.update()
-        except AttributeError:
-            pass
+        self.update()
 
     def update(self):
-        pass
+        """
+        Called when the GameObject gets updated.
+        """
 
     def destroy_(self):
-        for component in self.components.values():
+        """
+        Called when the GameObject or the parent Peapy object gets destroyed.
+        Don't override this method (!), use the destroy() method instead
+        """
+        for component in self.__components.values():
             component.destroy_()
 
-        try:
-            self.destroy()
-        except AttributeError:
-            pass
+        self.destroy()
 
     def destroy(self):
-        pass
+        """
+        Called when the GameObject or the parent Peapy object gets destroyed.
+        """
 
     def add_component(self, component: Component) -> Component:
+        """
+        Add the given component to the GameObject.
+        The init() method of the component gets called.
+
+        :param component: The component to add. :type component: peapy2.Component :return: The given component. This
+                          allows for this syntax: component = game_object.add_component(peapy2.Component())
+        """
         if not isinstance(component, Component):
             raise TypeError(f"Expected type peapy2.Component, got {type(component)}")
 
-        if component.NAME in self.components:
+        if component.NAME in self.__components:
             raise exceptions.ComponentAlreadyExists(component.NAME)
 
-        self.components[component.NAME] = component
-        self.components[component.NAME].init_(self.peapy, self.name)
-        return self.components[component.NAME]
+        self.__components[component.NAME] = component
+        self.__components[component.NAME].init_(self.peapy, self.name)
+        return self.__components[component.NAME]
 
     def get_component(self, name: str) -> Component:
-        if name not in self.components:
+        """
+        Get a component by it's name
+
+        :param name: The name of the component.
+        :type name: str
+        :return: The component.
+        """
+        if name not in self.__components:
             raise exceptions.ComponentDoesNotExist(name)
 
-        return self.components[name]
+        return self.__components[name]
 
     def get_components(self) -> dict[str, Component]:
-        return self.components
+        """
+        Get a dictionary of all components.
 
-    def remove_component(self, name: str) -> None:
-        if name not in self.components:
+        :return: A dictionary with all components.
+        """
+        return self.__components
+
+    def remove_component(self, name: str):
+        """
+        Remove the component with the given name.
+
+        :param name: The name of the component
+        :type name: str
+        """
+        if name not in self.__components:
             raise exceptions.ComponentDoesNotExist(name)
 
-        self.components[name].destroy_()
-        del self.components[name]
-
-    def tree(self) -> str:
-        out = f"\t{self.name}\n"
-        for component in self.components.values():
-            out += component.tree()
-        return out
+        self.__components[name].destroy_()
+        del self.__components[name]
 
     def __getitem__(self, item) -> Component:
         return self.get_component(item)

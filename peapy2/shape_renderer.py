@@ -1,16 +1,26 @@
+from peapy2.color import Color
 from peapy2.component import Component
 from peapy2.__pygame import pygame
 
 
-VALID_SHAPES = ["circle", "rectangle"]
-
-
 class ShapeRenderer(Component):
+    """
+    ShapeRenderer component to render shapes.
+    """
+
     NAME = "Renderer"
 
     def __init__(
-        self, shape: str, color: tuple[int, int, int] | tuple[int, int, int, int]
+        self, shape, color
     ):
+        """
+        Construct a ShapeRenderer.
+
+        :param shape: The name of the shape to render. Valid: "circle", "rectangle"
+        :type shape: str
+        :param color: The color of the shape.
+        :type color: Color
+        """
         super().__init__()
         self.shape = shape
         self.color = color
@@ -39,7 +49,7 @@ class ShapeRenderer(Component):
 
             pygame.draw.rect(
                 self.peapy.window.screen,
-                self.color,
+                self.color.rgba,
                 (top_left[0], top_left[1], width, height),
             )
 

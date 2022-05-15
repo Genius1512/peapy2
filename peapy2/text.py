@@ -1,3 +1,4 @@
+from peapy2.color import Color
 from peapy2.component import Component
 from peapy2.__pygame import pygame
 
@@ -10,7 +11,7 @@ class Text(Component):
         text: str,
         font_name: str,
         font_size: int,
-        color: tuple = (0, 0, 0),
+        color: Color,
         x_offset: int = 0,
         y_offset: int = 0,
     ):
@@ -38,7 +39,7 @@ class Text(Component):
         if not self.is_visible:
             return
 
-        text = self.__font.render(self.text, True, self.color)
+        text = self.__font.render(self.text, True, self.color.rgba)
         self.peapy.window.screen.blit(text, (
             self.peapy[self.parent_name]["Transform"].x + self.x_offset,
             self.peapy[self.parent_name]["Transform"].y + self.y_offset

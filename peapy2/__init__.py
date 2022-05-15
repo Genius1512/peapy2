@@ -1,3 +1,4 @@
+from peapy2.color import Color
 from peapy2.component import Component
 from peapy2 import exceptions
 from peapy2.game_object import GameObject

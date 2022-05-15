@@ -4,6 +4,8 @@
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/.venv" />
       <excludeFolder url="file://$MODULE_DIR$/build/bdist.win-amd64" />
+      <excludeFolder url="file://$MODULE_DIR$/build" />
+      <excludeFolder url="file://$MODULE_DIR$/peapy2.egg-info" />
       <excludePattern pattern=".venv" />
     </content>
     <orderEntry type="inheritedJdk" />

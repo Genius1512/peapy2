@@ -25,7 +25,7 @@ class Logo(peapy2.GameObject):
             "DVD",
             "Arial",
             50,
-            (0, 0, 0),
+            peapy2.Color(0, 0, 0),
             0,
             0
         ))

@@ -19,10 +19,10 @@ def main():
         y_offset=0,
     ))
 
-    while game.update():
-        player_pos.x += 1
+    print(game.tree())
 
-    game.quit()
+    while game.update():
+        pass
 
 
 if __name__ == "__main__":
