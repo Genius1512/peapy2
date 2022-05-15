@@ -73,7 +73,3 @@ class ImageRenderer(Component):
         self.peapy.window.screen.blit(
             image, self.peapy[self.parent_name].get_component("Transform").top_left
         )
-
-    # Called when the component is destroyed
-    def destroy(self):
-        pass

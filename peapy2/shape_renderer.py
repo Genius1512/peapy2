@@ -52,7 +52,3 @@ class ShapeRenderer(Component):
                 self.color.rgba,
                 (top_left[0], top_left[1], width, height),
             )
-
-    # Called when the component is destroyed
-    def destroy(self):
-        pass

@@ -1,4 +1,8 @@
 class Color:
+    """
+    PeaPy Color class
+    """
+
     def __init__(self, *args):
         self.r = None
         self.g = None
