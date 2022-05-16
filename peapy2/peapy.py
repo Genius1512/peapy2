@@ -28,6 +28,7 @@ class PeaPy:
         self.window = Window(self.width, self.height, title)
 
         self.objects: dict[str, GameObject] = {}
+        self.should_delete: list[str] = []
 
     def update(self) -> bool:
         """
@@ -36,6 +37,15 @@ class PeaPy:
         :return: True if the game should continue, False if the window should close.
         """
         self.window.screen.fill(self.background_color.rgba)
+
+        for name in self.should_delete:
+            if name not in self.objects:
+                raise exceptions.ObjectDoesNotExist(name)
+
+            self.objects[name].destroy_()
+            del self.objects[name]
+
+        self.should_delete = []
 
         for obj in self.objects.values():
             obj.update_()
@@ -88,13 +98,9 @@ class PeaPy:
         :param name: The name of the GameObject
         :type name: str
         """
-        if name not in self.objects:
-            raise exceptions.ObjectDoesNotExist(name)
+        self.should_delete.append(name)
 
-        self.objects[name].destroy_()
-        del self.objects[name]
-
-    def tree(self) -> str:  # TODO: Rewrite
+    def tree(self) -> str:
         """
         Get a tree representation of the PeaPy object.
 

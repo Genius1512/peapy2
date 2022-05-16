@@ -7,7 +7,7 @@ class Window:
     Used to create a window for the game.
     """
 
-    def __init__(self, width, height, title, background_color):
+    def __init__(self, width, height, title):
         """
         Construct a Window object.
 
@@ -17,13 +17,10 @@ class Window:
         :type height: int
         :param title: Title of the window
         :type title: str
-        :param background_color: Color of the window
-        :type background_color: peapy2.Color
         """
         self.width = width
         self.height = height
         self.title = title
-        self.background_color = background_color
 
         pygame.init()
 
@@ -34,6 +31,7 @@ class Window:
 
         self.delta_time = 0.0
         self.fps = 0.0
+        self.frame_count = 0
 
     def update(self) -> bool:
         """
@@ -43,6 +41,7 @@ class Window:
         """
         self.delta_time = self.clock.tick(60) / 1000.0
         self.fps = self.clock.get_fps()
+        self.frame_count += 1
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
