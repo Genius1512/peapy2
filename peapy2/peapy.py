@@ -1,3 +1,4 @@
+from peapy2.__pygame import pygame
 from peapy2.color import Color
 from peapy2 import exceptions
 from peapy2.game_object import GameObject
@@ -6,7 +7,7 @@ from peapy2.window import Window
 
 class PeaPy:
     def __init__(
-            self, title, width, height, background_color=Color(0, 0, 0),
+            self, title, width, height, background_color=Color(0, 0, 0), icon_path = None
     ):
         """
         Construct a PeaPy object.
@@ -19,13 +20,20 @@ class PeaPy:
         :type height: int
         :param background_color: Color of the window
         :type background_color: Color
+        :param icon_path: Path to the icon of the window. If None, the default icon is used
+        :type icon_path: str | None
         """
         self.title = title
         self.width = width
         self.height = height
         self.background_color = background_color
+        self.icon_path = icon_path
+        if icon_path == None:
+            self.icon_path = "icon.png"
 
         self.window = Window(self.width, self.height, title)
+
+        pygame.display.set_icon(pygame.image.load(self.icon_path))
 
         self.objects: dict[str, GameObject] = {}
         self.should_delete: list[str] = []
